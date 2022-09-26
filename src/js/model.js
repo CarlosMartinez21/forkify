@@ -1,6 +1,12 @@
 import { config } from 'process';
 import { async } from 'regenerator-runtime';
-import { API_URL, RES_PER_PAGE, KEY } from './config.js';
+import {
+  API_URL,
+  RES_PER_PAGE,
+  KEY,
+  SPOON_KEY,
+  SPOON_NUTR_URL,
+} from './config.js';
 import { AJAX } from './helpers.js';
 import recipeView from './views/recipeView.js';
 
@@ -39,6 +45,22 @@ export const loadRecipe = async function (id) {
     else state.recipe.bookmarked = false;
   } catch (err) {
     throw err;
+    recipeView.renderError();
+  }
+};
+
+export const getNutrition = async function () {
+  try {
+    const data = await AJAX(
+      `${SPOON_NUTR_URL}?title=${state.recipe.title
+        .split(' ')
+        .join('+')}&apiKey=${SPOON_KEY}`
+    );
+    if (data.status === 'error') state.recipe.calories = 'Not Available';
+    if (data.calories)
+      state.recipe.calories = data.calories.value / state.recipe.servings;
+  } catch (err) {
+    console.error(err);
     recipeView.renderError();
   }
 };
@@ -107,7 +129,6 @@ const init = function () {
   if (storage) state.bookmarks = JSON.parse(storage);
 };
 init();
-console.log(state.bookmarks);
 
 export const uploadRecipe = async function (newRecipe) {
   try {

@@ -21,6 +21,7 @@ class PaginationView extends View {
               <use href="${icons}#icon-arrow-right"></use>
             </svg>
           </button>
+        <p class="btn--inline pagination__btn--center">Page ${curPage}/Page ${numPages}</p>
       `;
     }
 
@@ -35,6 +36,7 @@ class PaginationView extends View {
             </svg>
           <span>Page ${curPage - 1}</span>
         </button>
+        <p class="btn--inline  pagination__btn--center">Page ${curPage}/Page ${numPages}</p>
         `;
     }
 
@@ -57,6 +59,7 @@ class PaginationView extends View {
                 <use href="${icons}#icon-arrow-right"></use>
             </svg>
         </button>
+        <p class="btn--inline pagination__btn--center">Page ${curPage}/Page ${numPages}</p>
         `;
     }
     //Page 1 and there are No other pages

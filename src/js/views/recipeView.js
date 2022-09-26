@@ -78,6 +78,13 @@ class RecipeView extends View {
               </button>
             </div>
           </div>
+          <div>
+            <span class="recipe__info">calories: ${
+              typeof this._data.calories === 'string'
+                ? this._data.calories
+                : Math.trunc(this._data.calories * this._data.servings)
+            }</span>  
+          </div>
             <div class="recipe__user-generated ${
               this._data.key ? '' : 'hidden'
             }">

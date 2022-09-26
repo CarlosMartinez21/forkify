@@ -26,6 +26,10 @@
     &--next {
       float: right;
     }
+    &--center {
+      float: none;
+      text-align: right;
+    }
   }
 }
 
